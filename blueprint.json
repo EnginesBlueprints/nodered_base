@@ -35,11 +35,11 @@
       "name": "nodered",
       "framework": "node6.9",
       "memory": {
-        "required": "256",
-        "recommended": "256"
+        "required": 256,
+        "recommended": 256
       },
       "http_protocol": "https_only",
-      "framework_port_override": "0",
+      "framework_port_override": 0,
       "deployment_type": "web",
       "web_root_directory": "",
       "continuous_deployment": false,
@@ -286,24 +286,24 @@
       {
         "name": "Engines_Debug_Run",
         "value": "true",
-        "ask_at_build_time": false,
+        "ask_at_build_time": true,
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": "",
-          "label": "",
+          "label": "debug",
+          "type": "string",
           "title": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": true
+          },
           "validation": {
             "required": false,
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -314,20 +314,20 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": "",
           "label": "Window Label",
+          "type": "string",
           "title": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "required": false,
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -338,20 +338,20 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": "password",
           "label": "Admin Password",
+          "type": "password_with_confirmation",
           "title": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "required": true,
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -362,20 +362,20 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": "",
           "label": "View User",
+          "type": "string",
           "title": "Leave blank for no auth on view",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "required": false,
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -386,20 +386,20 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": "password",
           "label": "View User Password",
+          "type": "password_with_confirmation",
           "title": "Leave blank for no auth on view",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "required": false,
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       }
