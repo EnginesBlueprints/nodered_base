@@ -32,14 +32,14 @@
   },
   "software": {
     "base": {
-      "name": "node_red_deploy",
+      "name": "nodered",
       "framework": "node6.9",
       "memory": {
-        "required": 256,
-        "recommended": 256
+        "required": "256",
+        "recommended": "256"
       },
       "http_protocol": "https_only",
-      "framework_port_override": 0,
+      "framework_port_override": "0",
       "deployment_type": "web",
       "web_root_directory": "",
       "continuous_deployment": false,
@@ -290,7 +290,7 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": null,
+          "type": "",
           "label": "",
           "title": "",
           "hint": "",
@@ -314,7 +314,7 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": null,
+          "type": "",
           "label": "Window Label",
           "title": "",
           "hint": "",
@@ -362,7 +362,7 @@
         "build_time_only": false,
         "immutable": false,
         "input": {
-          "type": null,
+          "type": "",
           "label": "View User",
           "title": "Leave blank for no auth on view",
           "hint": "",
