@@ -15,7 +15,7 @@
         "level": "beta",
         "patch": 0
       },
-      "timestamp": "2017-03-06 02:03:46 UTC"
+      "timestamp": null
     },
     "software": {
       "display": {
@@ -53,7 +53,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/trap.sh\r\nnpm config set strict-ssl false\r\n if test -f $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\nrm /engines/var/run/flags/startup_complete "
+        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/trap.sh\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\nrm /engines/var/run/flags/startup_complete "
       },
       "install": {
         "language": "sh",
@@ -137,24 +137,24 @@
         "name": "Engines_Debug_Run",
         "value": "true",
         "mandatory": false,
-        "immutable": false,
         "ask_at_build_time": true,
         "build_time_only": false,
+        "immutable": false,
         "input": {
-          "type": "string",
           "label": "debug",
+          "type": "boolean",
           "title": "",
           "comment": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": true
+          },
           "validation": {
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": true,
-            "items": {
-            }
           }
         }
       },
@@ -162,24 +162,24 @@
         "name": "title",
         "value": "_Engines_Builder(engine_name)",
         "mandatory": false,
-        "immutable": false,
         "ask_at_build_time": true,
         "build_time_only": false,
+        "immutable": false,
         "input": {
-          "type": "string",
           "label": "Window Label",
+          "type": "string",
           "title": "",
           "comment": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -187,24 +187,24 @@
         "name": "password",
         "value": "",
         "mandatory": false,
-        "immutable": false,
         "ask_at_build_time": true,
         "build_time_only": false,
+        "immutable": false,
         "input": {
-          "type": "password_with_confirmation",
           "label": "Admin Password",
+          "type": "password_with_confirmation",
           "title": "",
           "comment": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -212,24 +212,24 @@
         "name": "view_username",
         "value": "",
         "mandatory": false,
-        "immutable": false,
         "ask_at_build_time": true,
         "build_time_only": false,
+        "immutable": false,
         "input": {
-          "type": "string",
           "label": "View User",
+          "type": "string",
           "title": "Leave blank for no auth on view",
           "comment": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       },
@@ -237,24 +237,24 @@
         "name": "view_password",
         "value": "",
         "mandatory": false,
-        "immutable": false,
         "ask_at_build_time": true,
         "build_time_only": false,
+        "immutable": false,
         "input": {
-          "type": "password_with_confirmation",
           "label": "View User Password",
+          "type": "password_with_confirmation",
           "title": "Leave blank for no auth on view",
           "comment": "",
           "hint": "",
           "placeholder": "",
+          "collection": {
+            "items": {
+            },
+            "include_blank": false
+          },
           "validation": {
             "pattern": "",
             "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
           }
         }
       }
