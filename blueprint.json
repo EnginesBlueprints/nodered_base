@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2017-06-26T10:51:35+10:00"
+    "timestamp": "2017-06-26T11:01:51+10:00"
   },
   "software": {
     "base": {
@@ -227,6 +227,7 @@
         "variables": [
           {
             "name": "module",
+            "value": "test",
             "mandatory": true,
             "input": {
               "type": "string"
@@ -235,7 +236,7 @@
         ],
         "script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\n. /home/engines/functions/params_to_env.sh\r\nparms_to_env\r\nnpm  install -g ${module}"
+          "content": "#!/bin/bash\r\n. /home/engines/functions/params_to_env.sh\r\nparms_to_env\r\ncd /home/app\r\nnpm  install -g ${module}"
         }
       }
     ]
