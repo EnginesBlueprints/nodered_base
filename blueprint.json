@@ -5,7 +5,7 @@
       "major": 1,
       "minor": 0
     },
-    "origin": "Engines Developer Studio 1.0"
+    "origin": "Engines Developer Studio 0.2"
   },
   "metadata": {
     "blueprint": {
@@ -14,94 +14,68 @@
         "minor": 1,
         "level": "beta",
         "patch": 0
-      },
-      "timestamp": null
+      }
     },
     "software": {
       "display": {
         "title": "node red",
-        "label": "nodered",
-        "version": "",
-        "description": "",
-        "url": ""
+        "label": "nodered"
       },
       "license": {
         "label": "Apache v2",
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
-    }
+    },
+    "timestamp": "2017-06-26T10:47:10+10:00"
   },
   "software": {
     "base": {
       "name": "nodered",
       "framework": "node6.9",
+      "deployment_type": "web",
+      "http_protocol": "https_only",
+      "framework_port_override": 0,
       "memory": {
         "required": 256,
         "recommended": 256
-      },
-      "http_protocol": "https_only",
-      "framework_port_override": 0,
-      "deployment_type": "web",
-      "web_root_directory": "",
-      "continuous_deployment": false,
-      "first_run_url": "",
-      "installation_report": ""
+      }
     },
-    "ports": [
-
-    ],
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/trap.sh\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\nrm /engines/var/run/flags/startup_complete "
+        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\nrm /engines/var/run/flags/startup_complete "
       },
       "install": {
         "language": "sh",
         "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
       },
       "post_install": {
-        "language": "sh",
-        "content": ""
+        "language": "sh"
       },
       "shutdown": {
-        "language": "sh",
-        "content": ""
+        "language": "sh"
       }
     },
-    "external_repositories": [
-
-    ],
-    "system_packages": [
-
-    ],
-    "installed_packages": [
-
-    ],
     "required_modules": [
       {
         "name": "node-red-contrib-modbus",
-        "type": "npm",
-        "os_package": ""
+        "type": "npm"
       },
       {
         "name": "node-red-node-mysql",
-        "type": "npm",
-        "os_package": ""
+        "type": "npm"
       },
       {
         "name": "node-red",
-        "type": "npm",
-        "os_package": ""
+        "type": "npm"
       },
       {
         "name": "node-red-dashboard",
-        "type": "npm",
-        "os_package": ""
+        "type": "npm"
       },
       {
         "name": "node-red-admin",
-        "type": "npm",
-        "os_package": ""
+        "type": "npm"
       }
     ],
     "service_configurations": [
@@ -136,126 +110,48 @@
       {
         "name": "Engines_Debug_Run",
         "value": "true",
-        "mandatory": false,
         "ask_at_build_time": true,
-        "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "debug",
           "type": "boolean",
-          "title": "",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
+          "label": "debug",
           "collection": {
-            "items": {
-            },
             "include_blank": true
-          },
-          "validation": {
-            "pattern": "",
-            "message": ""
           }
         }
       },
       {
         "name": "title",
         "value": "_Engines_Builder(engine_name)",
-        "mandatory": false,
         "ask_at_build_time": true,
-        "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "Window Label",
           "type": "string",
-          "title": "",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
-          "collection": {
-            "items": {
-            },
-            "include_blank": false
-          },
-          "validation": {
-            "pattern": "",
-            "message": ""
-          }
+          "label": "Window Label"
         }
       },
       {
         "name": "password",
-        "value": "",
-        "mandatory": false,
         "ask_at_build_time": true,
-        "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "Admin Password",
           "type": "password_with_confirmation",
-          "title": "",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
-          "collection": {
-            "items": {
-            },
-            "include_blank": false
-          },
-          "validation": {
-            "pattern": "",
-            "message": ""
-          }
+          "label": "Admin Password"
         }
       },
       {
         "name": "view_username",
-        "value": "",
-        "mandatory": false,
         "ask_at_build_time": true,
-        "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "View User",
           "type": "string",
-          "title": "Leave blank for no auth on view",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
-          "collection": {
-            "items": {
-            },
-            "include_blank": false
-          },
-          "validation": {
-            "pattern": "",
-            "message": ""
-          }
+          "label": "View User",
+          "title": "Leave blank for no auth on view"
         }
       },
       {
         "name": "view_password",
-        "value": "",
-        "mandatory": false,
         "ask_at_build_time": true,
-        "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "View User Password",
           "type": "password_with_confirmation",
-          "title": "Leave blank for no auth on view",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
-          "collection": {
-            "items": {
-            },
-            "include_blank": false
-          },
-          "validation": {
-            "pattern": "",
-            "message": ""
-          }
+          "label": "View User Password",
+          "title": "Leave blank for no auth on view"
         }
       }
     ],
@@ -271,79 +167,26 @@
         "content": "  // To password protect the node-defined HTTP endpoints (httpNodeRoot), or\r\n    // the static content (httpStatic), the following properties can be used.\r\n    // The pass field is a bcrypt hash of the password.\r\n    // See http://nodered.org/docs/security.html#generating-the-password-hash\r\n   // The pass field is a bcrypt hash of the password.\r\n    // See http://nodered.org/docs/security.html#generating-the-password-hash\r\n    //httpNodeAuth: {user:\"user\",pass:\"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.\"},\r\n    //httpStaticAuth: {user:\"user\",pass:\"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.\"},\r\n\r\n    // The following property can be used to enable HTTPS\r\n    // See http://nodejs.org/api/https.html#https_https_createserver_options_requestlistener\r\n    // for details on its contents.\r\n    // See the comment at the top of this file on how to load the `fs` module used by\r\n    // this setting.\r\n    //\r\n    //https: {\r\n    //    key: fs.readFileSync('privatekey.pem'),\r\n    //    cert: fs.readFileSync('certificate.pem')\r\n    //},\r\n\r\n    // The following property can be used to cause insecure HTTP connections to\r\n    // be redirected to HTTPS.\r\n    //requireHttps: true\r\n\r\n    // The following property can be used to disable the editor. The admin API\r\n    // is not affected by this option. To disable both the editor and the admin\r\n    // API, use either the httpRoot or httpAdminRoot properties\r\n    //disableEditor: false,\r\n\r\n    // The following property can be used to configure cross-origin resource sharing\r\n    // in the HTTP nodes.\r\n    // See https://github.com/troygoode/node-cors#configuration-options for\r\n    // details on its contents. The following is a basic permissive set of options:\r\n    //httpNodeCors: {\r\n    //    origin: \"*\",\r\n    //    methods: \"GET,PUT,POST,DELETE\"\r\n    //},\r\n\r\n    // If you need to set an http proxy please set an environment variable\r\n    // called http_proxy (or HTTP_PROXY) outside of Node-RED in the operating system.\r\n    // For example - http_proxy=http://myproxy.com:8080\r\n    // (Setting it here will have no effect)\r\n    // You may also specify no_proxy (or NO_PROXY) to supply a comma separated\r\n    // list of domains to not proxy, eg - no_proxy=.acme.co,.acme.co.uk\r\n\r\n    // The following property can be used to add a custom middleware function\r\n    // in front of all http in nodes. This allows custom authentication to be\r\n    // applied to all http in nodes, or any other sort of common request processing.\r\n    //httpNodeMiddleware: function(req,res,next) {\r\n    //    // Handle/reject the request, or pass it on to the http in node by calling next();\r\n    //    // Optionally skip our rawBodyParser by setting this to true;\r\n    //    //req.skipRawBodyParser = true;\r\n    //    next();\r\n    //},\r\n\r\n    // Anything in this hash is globally available to all functions.\r\n    // It is accessed as context.global.\r\n    // eg:\r\n    //    functionGlobalContext: { os:require('os') }\r\n    // can be accessed in a function block as:\r\n    //    context.global.os\r\n\r\n    functionGlobalContext: {\r\n        // os:require('os'),\r\n        // octalbonescript:require('octalbonescript'),\r\n        // os:require('os'),\r\n        // octalbonescript:require('octalbonescript'),\r\n        // jfive:require(\"johnny-five\"),\r\n        // j5board:require(\"johnny-five\").Board({repl:false})\r\n    },\r\n\r\n    // The following property can be used to order the categories in the editor\r\n    // palette. If a node's category is not in the list, the category will get\r\n    // added to the end of the palette.\r\n    // If not set, the following default order is used:\r\n    //paletteCategories: ['subflows', 'input', 'output', 'function', 'social', 'mobile', 'storage', 'analysis', 'advanced'],\r\n\r\n    // Configure the logging output\r\n    logging: {\r\n        // Only console logging is currently supported\r\n        console: {\r\n            // Level of logging to be recorded. Options are:\r\n            // fatal - only those errors which make the application unusable should be recorded\r\n            // error - record errors which are deemed fatal for a particular request + fatal errors\r\n            // warn - record problems which are non fatal + errors + fatal errors\r\n            // info - record information about the general running of the application + warn + error + fatal errors\r\n            // debug - record information which is more verbose than info + info + warn + error + fatal errors\r\n            // trace - record very detailed logging + debug + info + warn + error + fatal errors\r\n            level: \"info\",\r\n            // Whether or not to include metric events in the log output\r\n            metrics: false,\r\n            // Whether or not to include audit events in the log output\r\n            audit: false\r\n        }\r\n    }\r\n}"
       }
     ],
-    "replacement_strings": [
-
-    ],
     "database_seed": {
-      "language": "text",
-      "content": "",
-      "script": false
+      "language": "text"
     },
-    "file_write_permissions": [
-
-    ],
-    "persistent_directories": [
-
-    ],
     "persistent_files": [
       {
         "path": "app/settings.js"
       }
     ],
-    "components": {
-      "sources": [
-
-      ],
-      "path": "",
-      "extract": false
-    },
-    "workers": {
-      "blocking": "",
-      "commands": [
-
-      ]
-    },
-    "rake_tasks": [
-
-    ],
-    "custom_php_inis": [
-
-    ],
-    "apache_htaccess_files": [
-
-    ],
-    "apache_httpd_configurations": [
-
-    ],
     "actionators": [
       {
         "name": "set_admin_password",
         "label": "Set Admin password",
-        "description": "",
         "return_type": "plain_text",
-        "return_file_name": "",
         "enable_logging": true,
         "variables": [
           {
             "name": "password",
-            "value": "",
-            "mandatory": false,
             "input": {
               "type": "password",
-              "label": "Password",
-              "title": "",
-              "comment": "",
-              "hint": "",
-              "placeholder": "",
-              "validation": {
-                "pattern": "",
-                "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
-              }
+              "label": "Password"
             }
           }
         ],
@@ -355,53 +198,20 @@
       {
         "name": "set_view_user",
         "label": "Setup View User",
-        "description": "",
         "return_type": "plain_text",
-        "return_file_name": "",
-        "enable_logging": false,
         "variables": [
           {
             "name": "view_password",
-            "value": "",
-            "mandatory": false,
             "input": {
               "type": "password",
-              "label": "View User Password",
-              "title": "",
-              "comment": "",
-              "hint": "",
-              "placeholder": "",
-              "validation": {
-                "pattern": "",
-                "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
-              }
+              "label": "View User Password"
             }
           },
           {
             "name": "view_username",
-            "value": "",
-            "mandatory": false,
             "input": {
               "type": "text",
-              "label": "View User",
-              "title": "",
-              "comment": "",
-              "hint": "",
-              "placeholder": "",
-              "validation": {
-                "pattern": "",
-                "message": ""
-              },
-              "collection": {
-                "include_blank": false,
-                "items": {
-                }
-              }
+              "label": "View User"
             }
           }
         ],
@@ -410,9 +220,6 @@
           "content": "#!/bin/bash\r\n\r\ncat $1 | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\nif ! test -z $view_password\r\n then\r\nencrypt=`echo $view_password | node-red-admin hash-pw | cut -f2 -d\" \"`\r\necho \"httpNodeAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n      httpStaticAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n\" >/home/fs/node-red-data/view_auth.js\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/fs/node-red-data/view_auth.js /home/app/settings.js.tail > /home/app/settings.js\r\n\r\nfi\r\necho OK"
         }
       }
-    ],
-    "schedules": [
-
     ]
   }
 }
