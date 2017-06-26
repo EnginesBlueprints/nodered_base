@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2017-06-26T10:47:10+10:00"
+    "timestamp": "2017-06-26T10:51:35+10:00"
   },
   "software": {
     "base": {
@@ -218,6 +218,24 @@
         "script": {
           "language": "sh",
           "content": "#!/bin/bash\r\n\r\ncat $1 | /home/engines/bin/json_to_env >/tmp/.env\r\n. /tmp/.env\r\nif ! test -z $view_password\r\n then\r\nencrypt=`echo $view_password | node-red-admin hash-pw | cut -f2 -d\" \"`\r\necho \"httpNodeAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n      httpStaticAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n\" >/home/fs/node-red-data/view_auth.js\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/fs/node-red-data/view_auth.js /home/app/settings.js.tail > /home/app/settings.js\r\n\r\nfi\r\necho OK"
+        }
+      },
+      {
+        "name": "add_module",
+        "label": "Add Node Module",
+        "return_type": "plain_text",
+        "variables": [
+          {
+            "name": "module",
+            "mandatory": true,
+            "input": {
+              "type": "string"
+            }
+          }
+        ],
+        "script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n. /home/engines/functions/params_to_env.sh\r\nparms_to_env\r\nnpm  install -g ${module}"
         }
       }
     ]
