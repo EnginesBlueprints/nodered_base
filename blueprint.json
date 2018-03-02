@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T14:21:44+11:00"
+    "timestamp": "2018-03-02T14:28:02+11:00"
   },
   "software": {
     "base": {
@@ -43,7 +43,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\nstartup_complete\r\nwait\r\nshutdown_complete "
+        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\nstartup_complete\r\nwait\r\nshutdown_complete "
       },
       "install": {
         "language": "sh",
@@ -83,7 +83,7 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "filesystem/local/filesystem",
         "variables": {
-          "service_name": "_Engines_Builder(engine_name)",
+          "service_name": "files",
           "volume_src": "",
           "engine_path": "node-red-data",
           "permissions": "rw",
@@ -170,54 +170,11 @@
     },
     "persistent_files": [
       {
-        "path": "app/settings.js"
+        "path": "app/settings.js",
+        "volume_name": "files"
       }
     ],
     "actionators": [
-      {
-        "name": "set_admin_password",
-        "label": "Set Admin password",
-        "return_type": "plain_text",
-        "enable_logging": true,
-        "variables": [
-          {
-            "name": "password",
-            "input": {
-              "type": "password",
-              "label": "Password"
-            }
-          }
-        ],
-        "script": {
-          "language": "sh",
-          "content": "#!/bin/bash\r\n. /home/engines/functions/params_to_env.sh\r\nparms_to_env\r\nencrypt=`echo $password | node-red-admin hash-pw | cut -f2 -d\" \"`\r\necho 'adminAuth: {\r\n        type: \"credentials\",\r\n        users: [{\r\n            username: \"admin\",\r\n' >/home/fs/node-red-data/auth.js\r\necho \"      password: \\\"$encrypt\\\",\r\n            permissions: \\\"*\\\"\r\n\" >> /home/fs/node-red-data/auth.js\r\necho '        }]\r\n    }, \r\n' >> /home/fs/node-red-data/auth.js\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/app/settings.js.tail > /home/app/settings.js\r\n\r\necho OK"
-        }
-      },
-      {
-        "name": "set_view_user",
-        "label": "Setup View User",
-        "return_type": "plain_text",
-        "variables": [
-          {
-            "name": "view_password",
-            "input": {
-              "type": "password",
-              "label": "View User Password"
-            }
-          },
-          {
-            "name": "view_username",
-            "input": {
-              "type": "text",
-              "label": "View User"
-            }
-          }
-        ],
-        "script": {
-          "language": "sh",
-          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nparms_to_env\r\nif ! test -z $view_password\r\n then\r\nencrypt=`echo $view_password | node-red-admin hash-pw | cut -f2 -d\" \"`\r\necho \"httpNodeAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n      httpStaticAuth: {user:\\\"$view_username\\\",pass:\\\"$encrypt\\\"},\r\n\" >/home/fs/node-red-data/view_auth.js\r\n\r\ncat /home/app/settings.js.head /home/fs/node-red-data/auth.js /home/fs/node-red-data/view_auth.js /home/app/settings.js.tail > /home/app/settings.js\r\n\r\nfi\r\necho OK"
-        }
-      },
       {
         "name": "add_module",
         "label": "Add Node Module",
