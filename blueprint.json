@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T18:00:02+11:00"
+    "timestamp": "2018-03-02T18:54:28+11:00"
   },
   "software": {
     "base": {
@@ -43,11 +43,11 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\ncd /home/app/\r\n\r\n\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\nstartup_complete\r\nwait\r\nshutdown_complete "
+        "content": "#!/bin/bash\r\nPID_FILE=/tmp/node_red.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\nnpm config set strict-ssl false\r\n if ! test -z $title\r\n then\r\n  title_option=\"--title $title\"\r\n fi\r\nif ! test -f /home/app/settings.js\r\n then\r\n\r\ncat /home/app/settings.js.head /home/app/settings.js.tail > /home/app/settings.js\r\nfi\r\n\r\ncd /home/app/\r\n\r\nHOME=/home/app\r\nexport HOME\r\n\r\nnode-red $title_option --userDir /home/fs/node-red-data/ -s /home/app/settings.js &\r\necho $! >/tmp/node_red.pid\r\n\r\nstartup_complete\r\nwait\r\nshutdown_complete "
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\nmkdr -p /home/app\r\ncd /home/app\r\nnpm install -g --unsafe-perm node-red\r\nnpm install -g node-red-dashboard\r\n\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
+        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\nmkdir -p /home/app\r\ncd /home/app\r\nHOME=/home/app\r\nexport HOME\r\nnpm install -g --unsafe-perm node-red\r\nnpm install -g node-red-dashboard\r\n\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
       },
       "post_install": {
         "language": "sh"
