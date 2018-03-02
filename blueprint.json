@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T16:20:01+11:00"
+    "timestamp": "2018-03-02T17:37:36+11:00"
   },
   "software": {
     "base": {
@@ -142,6 +142,12 @@
     "database_seed": {
       "language": "text"
     },
+    "file_write_permissions": [
+      {
+        "path": "/home/app",
+        "recursive": true
+      }
+    ],
     "persistent_files": [
       {
         "path": "app/settings.js",
