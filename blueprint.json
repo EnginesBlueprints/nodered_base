@@ -26,12 +26,12 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T17:41:28+11:00"
+    "timestamp": "2018-03-02T18:00:02+11:00"
   },
   "software": {
     "base": {
       "name": "nodered",
-      "framework": "node4.7",
+      "framework": "node8.9",
       "deployment_type": "web",
       "http_protocol": "https_only",
       "framework_port_override": 1880,
