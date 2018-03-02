@@ -2,8 +2,8 @@
   "schema": {
     "type": "app_blueprint",
     "version": {
-      "major": 1,
-      "minor": 0
+      "major": 0,
+      "minor": 1
     },
     "origin": "Engines Developer Studio 0.2"
   },
@@ -26,12 +26,12 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2017-06-26T11:16:01+10:00"
+    "timestamp": "2018-03-02T12:28:54+11:00"
   },
   "software": {
     "base": {
       "name": "nodered",
-      "framework": "node6.9",
+      "framework": "node7.2",
       "deployment_type": "web",
       "http_protocol": "https_only",
       "framework_port_override": 0,
@@ -95,14 +95,12 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "database/sql/mysql",
         "variables": {
-          "db_flavor": "mysql2",
-          "db_password": "_Engines_System(random(10))",
-          "collation": "utf8_general_ci",
-          "full_access": "false",
-          "name": "_Engines_Builder(engine_name)",
+          "database_name": "_Engines_Builder(engine_name)",
           "database_host": "_Engines_System(mysql_host)",
           "db_username": "_Engines_Builder(engine_name)",
-          "database_name": "_Engines_Builder(engine_name)"
+          "db_password": "_Engines_System(random(10))",
+          "collation": "utf8_general_ci",
+          "full_access": "false"
         }
       }
     ],
