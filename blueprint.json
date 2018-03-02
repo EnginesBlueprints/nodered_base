@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T14:28:02+11:00"
+    "timestamp": "2018-03-02T14:51:03+11:00"
   },
   "software": {
     "base": {
@@ -47,7 +47,7 @@
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
+        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\n\r\nnpm  install node-red\r\n\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
       },
       "post_install": {
         "language": "sh"
@@ -124,32 +124,6 @@
         "input": {
           "type": "string",
           "label": "Window Label"
-        }
-      },
-      {
-        "name": "password",
-        "ask_at_build_time": true,
-        "input": {
-          "type": "password_with_confirmation",
-          "label": "Admin Password"
-        }
-      },
-      {
-        "name": "view_username",
-        "ask_at_build_time": true,
-        "input": {
-          "type": "string",
-          "label": "View User",
-          "title": "Leave blank for no auth on view"
-        }
-      },
-      {
-        "name": "view_password",
-        "ask_at_build_time": true,
-        "input": {
-          "type": "password_with_confirmation",
-          "label": "View User Password",
-          "title": "Leave blank for no auth on view"
         }
       }
     ],
