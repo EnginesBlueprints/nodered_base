@@ -26,7 +26,7 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2018-03-02T18:54:28+11:00"
+    "timestamp": "2018-03-02T18:59:54+11:00"
   },
   "software": {
     "base": {
@@ -47,7 +47,7 @@
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\nmkdir -p /home/app\r\ncd /home/app\r\nHOME=/home/app\r\nexport HOME\r\nnpm install -g --unsafe-perm node-red\r\nnpm install -g node-red-dashboard\r\n\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
+        "content": "#!/bin/bash\r\nnpm config set strict-ssl false\r\nmkdir -p /home/app\r\ncd /home/app\r\n#HOME=/home/app\r\n#export HOME\r\n#npm install -g --unsafe-perm node-red\r\n#npm install -g node-red-dashboard\r\n\r\necho '{\"password\":\"_Engines_Environment(password)\"}' |/home/engines/scripts/actionators/set_admin_password.sh\r\n\r\nif ! test -z $view_password\r\n then\r\necho '{\"view_password\":\"_Engines_Environment(view_password)\",\"view_username\":\"_Engines_Environment(view_username)\"}' |/home/engines/scripts/actionators/set_view_user.sh\r\n\r\nfi\r\n\r\n"
       },
       "post_install": {
         "language": "sh"
