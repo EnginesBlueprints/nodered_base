@@ -26,12 +26,12 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2019-05-06T11:07:46+10:00"
+    "timestamp": "2019-05-07T14:02:28+10:00"
   },
   "software": {
     "base": {
       "name": "nodered",
-      "framework": "node_latest",
+      "framework": "node8",
       "deployment_type": "web",
       "http_protocol": "https_only",
       "framework_port_override": 1880,
@@ -88,7 +88,8 @@
           "engine_path": "node-red-data",
           "permissions": "rw",
           "user": "_Engines_Builder(data_uid)",
-          "group": "_Engines_Builder(data_gid)"
+          "group": "_Engines_Builder(data_gid)",
+          "fw_user": "_Engines_Builder(cont_user_id)"
         }
       },
       {
