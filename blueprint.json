@@ -26,12 +26,12 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
       }
     },
-    "timestamp": "2019-05-07T14:38:25+10:00"
+    "timestamp": "2020-02-18T15:29:39+11:00"
   },
   "software": {
     "base": {
       "name": "nodered",
-      "framework": "node_latest",
+      "framework": "node11",
       "deployment_type": "web",
       "http_protocol": "https_only",
       "framework_port_override": 1880,
@@ -89,7 +89,8 @@
           "permissions": "rw",
           "user": "_Engines_Builder(data_uid)",
           "group": "_Engines_Builder(data_gid)",
-          "fw_user": "_Engines_Builder(cont_user_id)"
+          "fw_user": "_Engines_Builder(cont_user_id)",
+          "exclude_from_backup": "false"
         }
       },
       {
